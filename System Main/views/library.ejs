@@ -1,0 +1,105 @@
+<!-- views/library.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Library</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .back-link {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 2rem;
+      text-decoration: none;
+      color: #007bff;
+      transition: transform 0.3s ease, color 0.3s ease;
+      background: none;
+    }
+    .back-link:hover {
+      transform: scale(1.2);
+      color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <a href="/admin_main" class="back-link">←</a>
+  <div class="container">
+    <h2>Welcome, <%= user.username %>!</h2>
+    <% if (success && success.length > 0) { %>
+      <div class="success">
+        <% success.forEach(msg => { %>
+          <p><%= msg %></p>
+        <% }) %>
+      </div>
+    <% } %>
+    <% if (error && error.length > 0) { %>
+      <div class="error">
+        <% error.forEach(msg => { %>
+          <p><%= msg %></p>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <!-- List of Students -->
+    <h3>Student List</h3>
+    <table border-size="1">
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Name</th>
+          <th>Date of Birth</th>
+          <th>Branch</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% students.forEach(student => { %>
+          <tr>
+            <td><%= student.studentID %></td>
+            <td><%= student.name %></td>
+            <td><%= student.dob.toISOString().substring(0,10) %></td>
+            <td><%= student.branch %></td>
+            <td>
+              <!-- Update form (inline) -->
+              <form action="/students/update/<%= student._id %>" method="POST" style="display:inline-block;">
+                <input type="text" name="name" placeholder="New Name" required>
+                <input type="date" name="dob" required>
+                <input type="text" name="branch" placeholder="Branch" required>
+                <button type="submit" class="updateButton">Update</button>
+              </form>
+              <!-- Delete button -->
+              <form action="/students/delete/<%= student._id %>" method="POST" style="display:inline-block;">
+                <button type="submit" class="deleteButton">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <!-- Add New Student Form -->
+    <h3>Add New Student</h3>
+    <form action="/students/add" method="POST" id="addStudentForm">
+      <label for="studentID">Student ID:</label>
+      <input type="text" name="studentID" id="studentID" required placeholder="Enter student ID">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="studentName" required placeholder="Enter name">
+      <label for="dob">Date of Birth:</label>
+      <input type="date" name="dob" id="studentDob" required>
+      <label for="branch">Branch:</label>
+      <input type="text" name="branch" id="studentBranch" required placeholder="Enter branch">
+      <button type="submit" id="addStudentButton">Add Student</button>
+    </form>
+    <br>
+  </div>
+  <script src="/js/main.js"></script>
+</body>
+</html>

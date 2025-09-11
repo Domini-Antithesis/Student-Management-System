@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>List Students</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .container {
+        max-height:100%;
+        max-width: 100%; /* Changed to make it dynamic */
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #fafafa;
+        border-radius: 10px;
+        box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        position: relative;
+         /* Added to ensure container height */
+        overflow-x: auto; /* Added to prevent horizontal overflow */
+        padding: 20px; /* Added padding for better spacing */
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%; /* Ensures table fits within the container */
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        table-layout: auto; /* Allows table to adjust column widths dynamically */
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .action-buttons a,
+    .action-buttons form {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .edit-btn,
+    .delete-btn {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .edit-btn {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .delete-btn {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .back-link {
+        display: block;
+        margin-top: 20px;
+        text-align: center;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .download-btn {
+        position: absolute;
+        top: 30px; /* Adjusted to shift the button 10-20px lower */
+        right: 20px; 
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #000;
+        background: none; 
+        border: none; 
+        padding: 0; 
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <a href="#" onclick="downloadStudentList()" class="download-btn">
+            Download<span style="margin-left: 5px;">⬇️</span>
+        </a>
+        <a href="/student/student_main" class="back-link">←</a>
+        <h2>Student List</h2>
+    
+        <% if (students.length === 0) { %>
+            <p>No students found.</p>
+        <% } else { %>
+            <table>
+            <thead>
+                <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Date of Birth</th>
+                <th>Branch</th>
+                <th>Courses</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% students.forEach(student => { %>
+                <tr>
+                    <td><%= student.studentID %></td>
+                    <td><%= student.name %></td>
+                    <td><%= student.dob ? student.dob.toISOString().substring(0,10) : '' %></td>
+                    <td><%= student.branch %></td>
+                    <td>
+                        <% if (studentCoursesMap[student._id.toString()] && studentCoursesMap[student._id.toString()].length > 0) { %>
+                        <%= studentCoursesMap[student._id.toString()].join(', ') %>
+                        <% } else { %>
+                        None
+                        <% } %>
+                    </td>
+                    <td class="action-buttons">
+        <a href="/student/edit_student/<%= student._id %>" class="edit-btn">Edit</a>
+        <form action="/student/delete_student/<%= student._id %>" method="POST" onsubmit="return confirm('Are you sure you want to remove this student?');">
+            <button type="submit" class="delete-btn">Delete</button>
+        </form>
+        </td>
+    </tr>
+    <% }) %>
+        </tbody>
+    </table>
+    <% } %>
+    
+    <a href="/student/student_main" class="back-link" id="backLink">←</a>
+        </div>
+    <script>
+        function downloadStudentList() {
+            const table = document.querySelector('table');
+            let csvContent = "data:text/csv;charset=utf-8,";
+
+            // Extract specific headers
+            const headers = ['Student ID', 'Student Name', 'Date of Birth', 'Branch', 'Courses'];
+            csvContent += headers.join(",") + "\n";
+
+            // Extract table rows
+            const rows = Array.from(table.querySelectorAll('tbody tr'));
+            rows.forEach(row => {
+                const cells = Array.from(row.querySelectorAll('td')).map(td => td.textContent.trim());
+                const filteredCells = [cells[0], cells[1], cells[2], cells[3], cells[4]]; // Select only required columns
+                csvContent += filteredCells.join(",") + "\n";
+            });
+
+            // Create a download link
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "student_list.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>

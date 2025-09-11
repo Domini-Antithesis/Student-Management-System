@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Enter Marks</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .marks-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .marks-table th, .marks-table td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .marks-table th {
+            background-color: #2c3e50;
+            color: #fff;
+        }
+
+        .marks-table tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        .submit-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[readonly] {
+            background-color: #f9f9f9;
+            cursor: not-allowed;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 2rem;
+            text-decoration: none;
+            color: #007bff;
+            transition: transform 0.3s ease, color 0.3s ease;
+            background: none;
+        }
+        .back-link:hover {
+            transform: scale(1.2);
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Marks</h2>
+        <a href="/marks" class="back-link" id="backLink">←</a>
+        <form action="/marks/enter" method="POST">
+            <table class="marks-table">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Course Code</th>
+                        <th>MST (30)</th>
+                        <th>EST (40)</th>
+                        <th>Internal (30)</th>
+                        <th>Total (100)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% students.forEach(student => { %>
+                        <tr>
+                            <td rowspan="<%= student.courses.length %>"><%= student.studentID %></td>
+                            <% student.courses.forEach((course, index) => { %>
+                                <% if (index > 0) { %><tr><% } %>
+                                <td><%= course.courseCode %></td>
+                                <td><input type="number" name="marks[<%= student.studentID %>][<%= course.courseCode %>][mst]" max="30" required></td>
+                                <td><input type="number" name="marks[<%= student.studentID %>][<%= course.courseCode %>][est]" max="40" required></td>
+                                <td><input type="number" name="marks[<%= student.studentID %>][<%= course.courseCode %>][internal]" max="30" required></td>
+                                <td><input type="number" name="marks[<%= student.studentID %>][<%= course.courseCode %>][total]" max="100" readonly></td>
+                                </tr>
+                            <% }) %>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <button type="submit" class="submit-btn">Update Marks</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const marksTable = document.querySelector('.marks-table');
+
+            marksTable.addEventListener('input', (event) => {
+                if (event.target.matches('input[type="number"]')) {
+                    const row = event.target.closest('tr');
+                    const internal = parseFloat(row.querySelector('input[name$="[internal]"]').value) || 0;
+                    const mst = parseFloat(row.querySelector('input[name$="[mst]"]').value) || 0;
+                    const est = parseFloat(row.querySelector('input[name$="[est]"]').value) || 0;
+
+                    const totalField = row.querySelector('input[name$="[total]"]');
+                    totalField.value = internal + mst + est;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Marks</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .back-link {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 2rem;
+            text-decoration: none;
+            color: #007bff;
+            transition: transform 0.3s ease, color 0.3s ease;
+            background: none;
+        }
+        .back-link:hover {
+            transform: scale(1.2);
+            color: #0056b3;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const marksTable = document.querySelector('.marks-table');
+
+            marksTable.addEventListener('input', (event) => {
+                if (event.target.matches('input[type="number"]')) {
+                    const row = event.target.closest('tr');
+                    const internal = parseFloat(row.querySelector('input[name$="[internal]"]').value) || 0;
+                    const mst = parseFloat(row.querySelector('input[name$="[mst]"]').value) || 0;
+                    const est = parseFloat(row.querySelector('input[name$="[est]"]').value) || 0;
+
+                    const totalField = row.querySelector('input[name$="[total]"]');
+                    totalField.value = internal + mst + est;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <a href="/marks" class="back-link" id="backLink">←</a>
+        <h2>Edit Marks for Student ID: <%= studentID %></h2>
+        <form action="/marks/update/edit/<%= studentID %>" method="POST">
+            <table class="marks-table">
+                <thead>
+                    <tr>
+                        <th>Course Code</th>
+                        <th>MST</th>
+                        <th>EST</th>
+                        <th>Internal</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% marks.forEach(mark => { %>
+                        <tr>
+                            <td><%= mark.courseCode %></td>
+                            <td><input type="number" name="marks[<%= mark.courseCode %>][mst]" value="<%= mark.mst %>" max="30" required></td>
+                            <td><input type="number" name="marks[<%= mark.courseCode %>][est]" value="<%= mark.est %>" max="40" required></td>
+                            <td><input type="number" id="internal" name="marks[<%= mark.courseCode %>][internal]" value="<%= mark.internal %>" max="30" required></td>
+                            <td><input type="number" name="marks[<%= mark.courseCode %>][total]" value="<%= mark.total %>" max="100" readonly></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+            <button type="submit" id="saveChangesButton">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>

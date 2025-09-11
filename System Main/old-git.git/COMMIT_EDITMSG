@@ -1,0 +1,27 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	new file:   models/Course.js
+#	modified:   models/Student.js
+#	modified:   public/css/styles.css
+#	modified:   routes/auth.js
+#	new file:   routes/courses.js
+#	modified:   routes/student.js
+#	modified:   server.js
+#	new file:   views/add_course.ejs
+#	new file:   views/add_student.ejs
+#	new file:   views/admin_main.ejs
+#	new file:   views/assign_course.ejs
+#	new file:   views/courses_main.ejs
+#	new file:   views/courses_search_result.ejs
+#	new file:   views/edit_course.ejs
+#	new file:   views/edit_student.ejs
+#	new file:   views/list_student.ejs
+#	new file:   views/student_main.ejs
+#	new file:   views/student_search_result.ejs
+#

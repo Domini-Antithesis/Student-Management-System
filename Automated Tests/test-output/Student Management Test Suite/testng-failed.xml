@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Student Management Test Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="All Tests(failed)">
+    <classes>
+      <class name="tests.AdminSearchCourseTest">
+        <methods>
+          <include name="runAdminSearchCourseTest"/>
+          <include name="afterMethod"/>
+          <include name="beforeTest"/>
+          <include name="afterSuite"/>
+          <include name="afterClass"/>
+          <include name="afterGroups"/>
+          <include name="beforeGroups"/>
+          <include name="beforeSuite"/>
+          <include name="afterTest"/>
+          <include name="beforeMethod"/>
+          <include name="beforeClass"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- tests.AdminSearchCourseTest -->
+      <class name="tests.StudentLoginTest">
+        <methods>
+          <include name="beforeGroups"/>
+          <include name="afterSuite"/>
+          <include name="beforeSuite"/>
+          <include name="afterClass"/>
+          <include name="afterGroups"/>
+          <include name="afterTest"/>
+          <include name="beforeTest"/>
+          <include name="beforeClass"/>
+          <include name="beforeMethod"/>
+          <include name="tearDown"/>
+          <include name="afterMethod"/>
+          <include name="setup"/>
+          <include name="runLoginTest"/>
+        </methods>
+      </class> <!-- tests.StudentLoginTest -->
+      <class name="tests.RegisterTest">
+        <methods>
+          <include name="beforeSuite"/>
+          <include name="afterClass"/>
+          <include name="afterGroups"/>
+          <include name="afterSuite"/>
+          <include name="afterTest"/>
+          <include name="afterMethod"/>
+          <include name="beforeTest"/>
+          <include name="beforeGroups"/>
+          <include name="beforeClass"/>
+          <include name="runRegisterTest"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="beforeMethod"/>
+        </methods>
+      </class> <!-- tests.RegisterTest -->
+      <class name="tests.AdminAddCourseTest">
+        <methods>
+          <include name="afterClass"/>
+          <include name="afterSuite"/>
+          <include name="beforeMethod"/>
+          <include name="beforeClass"/>
+          <include name="runAdminAddCourseTest"/>
+          <include name="afterMethod"/>
+          <include name="beforeTest"/>
+          <include name="afterGroups"/>
+          <include name="beforeGroups"/>
+          <include name="beforeSuite"/>
+          <include name="afterTest"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- tests.AdminAddCourseTest -->
+      <class name="tests.AdminUpdateMarksTest">
+        <methods>
+          <include name="afterMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeClass"/>
+          <include name="beforeTest"/>
+          <include name="runAdminUpdateMarksTest"/>
+          <include name="afterTest"/>
+          <include name="afterGroups"/>
+          <include name="afterClass"/>
+          <include name="beforeSuite"/>
+          <include name="afterSuite"/>
+          <include name="tearDown"/>
+          <include name="beforeGroups"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- tests.AdminUpdateMarksTest -->
+      <class name="tests.AdminEnterMarksTest">
+        <methods>
+          <include name="afterClass"/>
+          <include name="afterGroups"/>
+          <include name="beforeSuite"/>
+          <include name="beforeGroups"/>
+          <include name="afterMethod"/>
+          <include name="beforeTest"/>
+          <include name="afterSuite"/>
+          <include name="afterTest"/>
+          <include name="runAdminEnterMarksTest"/>
+          <include name="beforeClass"/>
+          <include name="beforeMethod"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- tests.AdminEnterMarksTest -->
+      <class name="tests.AdminListStudentTest">
+        <methods>
+          <include name="beforeGroups"/>
+          <include name="afterSuite"/>
+          <include name="beforeSuite"/>
+          <include name="afterClass"/>
+          <include name="afterGroups"/>
+          <include name="afterTest"/>
+          <include name="beforeTest"/>
+          <include name="beforeClass"/>
+          <include name="beforeMethod"/>
+          <include name="tearDown"/>
+          <include name="runAdminListStudentTest"/>
+          <include name="setup"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- tests.AdminListStudentTest -->
+      <class name="tests.StudentMainPageTest">
+        <methods>
+          <include name="beforeClass"/>
+          <include name="afterGroups"/>
+          <include name="beforeMethod"/>
+          <include name="afterSuite"/>
+          <include name="afterTest"/>
+          <include name="beforeSuite"/>
+          <include name="beforeGroups"/>
+          <include name="afterClass"/>
+          <include name="runStudentMainPageTest"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="beforeTest"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- tests.StudentMainPageTest -->
+      <class name="tests.AdminSearchStudentTest">
+        <methods>
+          <include name="afterTest"/>
+          <include name="beforeSuite"/>
+          <include name="afterGroups"/>
+          <include name="afterClass"/>
+          <include name="afterSuite"/>
+          <include name="beforeTest"/>
+          <include name="afterMethod"/>
+          <include name="beforeGroups"/>
+          <include name="beforeClass"/>
+          <include name="runAdminSearchStudentTest"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="beforeMethod"/>
+        </methods>
+      </class> <!-- tests.AdminSearchStudentTest -->
+      <class name="tests.AdminAddStudentTest">
+        <methods>
+          <include name="beforeClass"/>
+          <include name="afterTest"/>
+          <include name="beforeMethod"/>
+          <include name="beforeSuite"/>
+          <include name="runAdminAddStudentTest"/>
+          <include name="afterClass"/>
+          <include name="afterGroups"/>
+          <include name="afterSuite"/>
+          <include name="beforeTest"/>
+          <include name="afterMethod"/>
+          <include name="tearDown"/>
+          <include name="beforeGroups"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- tests.AdminAddStudentTest -->
+      <class name="tests.StudentMarksMainTest">
+        <methods>
+          <include name="beforeGroups"/>
+          <include name="beforeClass"/>
+          <include name="beforeMethod"/>
+          <include name="beforeSuite"/>
+          <include name="afterTest"/>
+          <include name="afterGroups"/>
+          <include name="runStudentMarksMainTest"/>
+          <include name="afterClass"/>
+          <include name="beforeTest"/>
+          <include name="afterMethod"/>
+          <include name="afterSuite"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- tests.StudentMarksMainTest -->
+      <class name="tests.AdminAssignCourseTest">
+        <methods>
+          <include name="runAdminAssignCourseTest"/>
+          <include name="beforeMethod"/>
+          <include name="afterTest"/>
+          <include name="beforeClass"/>
+          <include name="beforeGroups"/>
+          <include name="afterSuite"/>
+          <include name="afterMethod"/>
+          <include name="beforeTest"/>
+          <include name="afterGroups"/>
+          <include name="afterClass"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="beforeSuite"/>
+        </methods>
+      </class> <!-- tests.AdminAssignCourseTest -->
+      <class name="tests.StudentCourseMainTest">
+        <methods>
+          <include name="afterSuite"/>
+          <include name="runStudentCourseMainTest"/>
+          <include name="beforeMethod"/>
+          <include name="beforeClass"/>
+          <include name="afterClass"/>
+          <include name="beforeSuite"/>
+          <include name="afterTest"/>
+          <include name="afterMethod"/>
+          <include name="beforeTest"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="afterGroups"/>
+          <include name="beforeGroups"/>
+        </methods>
+      </class> <!-- tests.StudentCourseMainTest -->
+      <class name="tests.AdminMarksMainTest">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeClass"/>
+          <include name="afterSuite"/>
+          <include name="afterMethod"/>
+          <include name="beforeTest"/>
+          <include name="afterClass"/>
+          <include name="afterGroups"/>
+          <include name="beforeGroups"/>
+          <include name="afterTest"/>
+          <include name="tearDown"/>
+          <include name="runAdminMarksMainTest"/>
+          <include name="beforeSuite"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- tests.AdminMarksMainTest -->
+      <class name="tests.LoginTest">
+        <methods>
+          <include name="afterTest"/>
+          <include name="beforeMethod"/>
+          <include name="runLoginTest"/>
+          <include name="beforeClass"/>
+          <include name="afterMethod"/>
+          <include name="beforeTest"/>
+          <include name="afterSuite"/>
+          <include name="beforeGroups"/>
+          <include name="beforeSuite"/>
+          <include name="tearDown"/>
+          <include name="afterGroups"/>
+          <include name="afterClass"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- tests.LoginTest -->
+      <class name="tests.HomePageTest">
+        <methods>
+          <include name="afterMethod"/>
+          <include name="beforeClass"/>
+          <include name="runHomePageTest"/>
+          <include name="beforeMethod"/>
+          <include name="afterGroups"/>
+          <include name="afterClass"/>
+          <include name="afterTest"/>
+          <include name="beforeTest"/>
+          <include name="beforeGroups"/>
+          <include name="afterSuite"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="beforeSuite"/>
+        </methods>
+      </class> <!-- tests.HomePageTest -->
+      <class name="tests.AdminMainPageTest">
+        <methods>
+          <include name="beforeGroups"/>
+          <include name="afterGroups"/>
+          <include name="beforeTest"/>
+          <include name="afterMethod"/>
+          <include name="beforeSuite"/>
+          <include name="afterTest"/>
+          <include name="afterClass"/>
+          <include name="runAdminMainPageTest"/>
+          <include name="beforeMethod"/>
+          <include name="beforeClass"/>
+          <include name="tearDown"/>
+          <include name="afterSuite"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- tests.AdminMainPageTest -->
+    </classes>
+  </test> <!-- All Tests(failed) -->
+</suite> <!-- Failed suite [Student Management Test Suite] -->

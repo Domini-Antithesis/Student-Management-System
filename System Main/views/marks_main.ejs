@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Marks Management</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .container {
+        display: flex;
+        height: auto; /* Adjusted to accommodate content dynamically */
+        max-width: 100%;
+        max-height: 100%;
+        padding: 20px; /* Added padding for better spacing */
+        overflow: auto; /* Ensures no overflow issues */
+    }
+    .sidebar {
+        width: 200px;
+        background-color: #007bff;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        color: white;
+        border-radius: 10px;
+    }
+    .sidebar h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        color: #fff;
+    }
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+    }
+    .sidebar ul li {
+        margin: 10px 0;
+    }
+    .sidebar ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+    .sidebar ul li a:hover {
+        color: #d1ecf1;
+    }
+    .content {
+        flex: 1;
+        padding: 20px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    #assessBtn {
+        padding: 8px 16px;
+        font-size: 14px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 120px; 
+    }
+
+    #assessBtn:hover {
+        background-color: #45a049;
+    }
+
+    #failCount, #passCount, #remarks {
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 5px;
+    }
+
+    #remarks {
+        resize: none;
+        width: 150px; 
+        height: 40px; 
+    }
+    .input-group {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .input-group label {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .input-group input {
+        width: 50px;
+        padding: 2px;
+        text-align: center;
+    }
+
+    .controls-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; 
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .input-group, #remarks, #assessBtn {
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="sidebar">
+        <h3>Marks Menu</h3>
+        <ul>
+        <li><a href="/marks/enter" id="enterMarksButton">Enter Marks</a></li>
+        <li><a href="/marks/update" id="updateMarksButton">Update Marks</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <a href="/admin_main" id="backLink" class="back-link">←</a>
+        <h2>All Marks</h2>
+        <div class="controls-container">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="input-group">
+                    <label for="passCount">Pass:</label>
+                    <input type="text" id="passCount" readonly>
+                </div>
+                <div class="input-group">
+                    <label for="failCount">Fail:</label>
+                    <input type="text" id="failCount" readonly>
+                </div>
+                <div class="input-group">
+                    <label for="remarks">Failures:</label>
+                    <textarea id="remarks" placeholder="Displaying Failures..." readonly></textarea>
+                </div>
+            </div>
+            <button id="assessBtn">Assess 📊</button>
+        </div>
+        <table class="marks-table">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Course Code</th>
+                    <th>MST (30)</th>
+                    <th>EST (40)</th>
+                    <th>Internal (30)</th>
+                    <th>Total (100)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let currentStudentID = null; %>
+                <% marks.forEach((mark, index) => { %>
+                    <% if (mark.studentID !== currentStudentID) { %>
+                        <% if (index !== 0) { %></tr><% } %>
+                        <tr>
+                            <td rowspan="<%= marks.filter(m => m.studentID === mark.studentID).length %>"><%= mark.studentID %></td>
+                            <td><%= mark.courseCode %></td>
+                            <td><%= mark.mst %></td>
+                            <td><%= mark.est %></td>
+                            <td><%= mark.internal %></td>
+                            <td><%= mark.total %></td>
+                        </tr>
+                        <% currentStudentID = mark.studentID; %>
+                    <% } else { %>
+                        <tr>
+                            <td><%= mark.courseCode %></td>
+                            <td><%= mark.mst %></td>
+                            <td><%= mark.est %></td>
+                            <td><%= mark.internal %></td>
+                            <td><%= mark.total %></td>
+                        </tr>
+                    <% } %>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <script>
+        document.getElementById('assessBtn').addEventListener('click', () => {
+            const rows = document.querySelectorAll('.marks-table tbody tr');
+            const studentStatus = new Map();
+            const courseToppers = new Map();
+
+            rows.forEach(row => {
+                const studentIDCell = row.querySelector('td:first-child');
+                const courseCodeCell = row.querySelector('td:nth-child(2)');
+                const totalCell = row.querySelector('td:last-child');
+                const studentID = studentIDCell.textContent.trim();
+                const courseCode = courseCodeCell.textContent.trim();
+                const totalMarks = parseFloat(totalCell.textContent) || 0;
+
+                if (!studentStatus.has(studentID)) {
+                    studentStatus.set(studentID, { pass: false, fail: false });
+                }
+
+                if (totalMarks < 35) {
+                    studentStatus.get(studentID).fail = true;
+                } else {
+                    studentStatus.get(studentID).pass = true;
+                }
+
+                if (!courseToppers.has(courseCode) || courseToppers.get(courseCode).marks < totalMarks) {
+                    courseToppers.set(courseCode, { studentIDs: [studentID], marks: totalMarks });
+                } else if (courseToppers.get(courseCode).marks === totalMarks) {
+                    courseToppers.get(courseCode).studentIDs.push(studentID);
+                }
+            });
+
+            const failCount = Array.from(studentStatus.values()).filter(status => status.fail).length;
+            const passCount = Array.from(studentStatus.values()).filter(status => status.pass).length;
+            const failedStudentIDs = Array.from(studentStatus.entries())
+                .filter(([_, status]) => status.fail)
+                .map(([studentID]) => studentID)
+                .join(', ');
+
+            document.getElementById('failCount').value = failCount;
+            document.getElementById('passCount').value = passCount;
+            document.getElementById('remarks').value = failedStudentIDs;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!-- views/admin_main.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    body {
+      background: url('/images/overall_background_image.png') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .info-container {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+    }
+
+    .info-box {
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid #007bff;
+      border-radius: 10px;
+      padding: 20px;
+      width: 200px;
+      text-align: center;
+      font-weight: bold;
+      color: #007bff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .info-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="container" style="background-color: rgba(255, 255, 255, 0.8);">
+    <h2>Welcome, <%= user.username %>!</h2>
+    <% if (success && success.length > 0) { %>
+      <div class="success">
+        <% success.forEach(msg => { %>
+          <p><%= msg %></p>
+        <% }) %>
+      </div>
+    <% } %>
+    <% if (error && error.length > 0) { %>
+      <div class="error">
+        <% error.forEach(msg => { %>
+          <p><%= msg %></p>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <div class="info-container">
+      <a href="/student/student_main" id="studentManageLink" class="info-box">Manage Students</a>
+      <a href="/courses/courses_main" id="coursesManageLink" class="info-box">Manage Courses</a>
+      <a href="/marks" id="marksManageLink" class="info-box">Manage Marks</a>
+    </div>
+    <br>
+    <a href="/logout" id="logoutLink">Logout</a>
+  </div>
+  <script src="/js/main.js"></script>
+</body>
+</html>

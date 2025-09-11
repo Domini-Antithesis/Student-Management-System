@@ -1,0 +1,51 @@
+<!-- views/register.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      width: 40%; /* Reduced to half of the original 80% */
+    }
+    button {
+      width: auto;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="home-link" id="homeLink" style="position: absolute; top: 10px; left: 10px; font-size: 2rem; text-decoration: none;">🏠</a>
+    <h2>Register</h2>
+    <% if (error && error.length > 0) { %>
+      <div class="error">
+        <% error.forEach(msg => { %>
+          <p><%= msg %></p>
+        <% }) %>
+      </div>
+    <% } %>
+    <form action="/register" method="POST" id="registerForm">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" required placeholder="Enter username">
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="regEmail" required placeholder="Enter email">
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="regPassword" required placeholder="At least 8 characters">
+      <label for="dob">Date of Birth:</label>
+      <input type="date" name="dob" id="regDob" required>
+      <button type="submit" id="registerButton">Register</button>
+    </form>
+    <p>Already have an account? <a href="/login" id="loginLink">Login here</a></p>
+  </div>
+  <script src="/js/main.js"></script>
+</body>
+</html>

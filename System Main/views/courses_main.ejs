@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .container {
+        display: flex;
+        height: 100vh;
+    }
+    .sidebar {
+        width: 200px;
+        background-color: #007bff;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        color: white;
+        border-radius: 10px;
+    }
+    .sidebar h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        color: #fff;
+    }
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+    }
+    .sidebar ul li {
+        margin: 10px 0;
+    }
+    .sidebar ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+    .sidebar ul li a:hover {
+        color: #d1ecf1;
+    }
+    .content {
+        flex: 1;
+        padding: 20px;
+    }
+    .course-box {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background-color: #fff;
+    }
+    form.search-bar {
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+    <h3>Course Menu</h3>
+    <ul>
+        <li><a href="/courses/add_course" id="addCourseLink">Add Course</a></li>
+        <li><a href="/courses/assign_course" id="assignCourseLink">Assign Course</a></li>
+    </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Back Link -->
+        <a href="/admin_main" id="backLink" class="back-link">←</a>
+        <!-- Search -->
+        <form action="/courses/search_course" method="get" class="search-bar">
+        <input type="text" name="query" placeholder="Search courses by code or name..." required>
+        <button type="submit">Search</button>
+        </form>
+        <!-- Courses List -->
+        <!--   <h2>All Courses</h2>
+        <% if (courses.length === 0) { %>
+        <p>No courses found.</p>
+        <% } else { %>
+        <% courses.forEach(course => { %>
+            <div class="course-box">
+            <h4><%= course.courseName %> (<%= course.courseCode %>)</h4>
+            <p><%= course.description %></p>
+            <a href="/courses/edit_course/<%= course._id %>">Edit</a> |
+            <a href="/courses/delete_course/<%= course._id %>" onclick="return confirm('Are you sure?')">Delete</a>
+            </div>
+        <% }) %>
+        <% } %>-->
+    </div>
+    </div>
+</body>
+</html>

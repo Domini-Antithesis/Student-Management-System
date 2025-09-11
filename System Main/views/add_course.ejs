@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Course</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .form-container {
+        max-width: 500px;
+        margin: 50px auto;
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-container label {
+        display: block;
+        margin: 10px 0 5px;
+    }
+
+    .form-container input,
+    .form-container textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .form-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .form-container a {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        text-decoration: none;
+        color: #007bff;
+    }
+</style>
+</head>
+<body>
+    <div class="form-container">
+    <h2>Add New Course</h2>
+    <% if (error && error.length > 0) { %>
+        <div class="error">
+        <% error.forEach(msg => { %>
+            <p><%= msg %></p>
+        <% }) %>
+        </div>
+    <% } %>
+    <form action="/courses/add_course" method="POST">
+        <label for="courseCode">Course Code:</label>
+        <input type="text" id="courseCode" name="courseCode" required placeholder="e.g. CS101">
+
+        <label for="courseName">Course Name:</label>
+        <input type="text" id="courseName" name="courseName" required placeholder="e.g. Introduction to Programming">
+
+        <label for="description">Course Description:</label>
+        <textarea id="description" name="description" rows="4" placeholder="Enter course description (optional)"></textarea>
+
+        <label for="credits">Course Credits:</label>
+        <input type="number" id="credits" name="credits"  required placeholder="e.g. 3">
+
+        <button type="submit" id="addCourseButton">Add Course</button>
+    </form>
+    <a href="/courses/courses_main" class="back-link">←</a>
+    </div>
+</body>
+</html>

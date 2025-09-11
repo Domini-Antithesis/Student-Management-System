@@ -1,0 +1,55 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Student Management Test Suite">
+  <test name="All Tests">
+  	<groups>
+  		<define name="login">
+  			<include name="tests.HomePageTest"/>
+  			<include name="tests.LoginTest"/>
+  			<include name="tests.RegisterTest"/>
+  			<include name="tests.StudentLoginTest"/>
+  		</define>
+  		<define name="student">
+  			<include name="tests.StudentMainPageTest"/>
+  			<include name="tests.StudentCourseMainTest"/>
+  			<include name="tests.StudentMarksMainTest"/>
+  		</define>
+  		<define name="admin">
+  			<include name="tests.AdminMainPageTest"/>
+  			<include name="tests.AdminAddStudentTest"/>
+  			<include name="tests.AdminListStudentTest"/>
+  			<include name="tests.AdminSearchStudentTest"/>
+  			<include name="tests.AdminAddCourseTest"/>
+  			<include name="tests.AdminAssignCourseTest"/>
+  			<include name="tests.AdminSearchCourseTest"/>
+  			<include name="tests.AdminMarksMainTest"/>
+  			<include name="tests.AdminEnterMarksTest"/>
+  			<include name="tests.AdminUpdateMarksTest"/>
+  		</define>
+  	</groups>
+    <classes>
+    
+    
+      <class name="tests.HomePageTest"/>
+      <class name="tests.LoginTest"/>
+      <class name="tests.RegisterTest"/>
+      <class name="tests.StudentLoginTest"/>
+      
+      <class name="tests.StudentMainPageTest"/>
+      <class name="tests.StudentCourseMainTest"/>
+      <class name="tests.StudentMarksMainTest"/>
+      
+      <class name="tests.AdminMainPageTest"/>
+      <class name="tests.AdminAddStudentTest"/>
+      <class name="tests.AdminListStudentTest"/>
+      <class name="tests.AdminSearchStudentTest"/>
+      <class name="tests.AdminAddCourseTest"/>
+      <class name="tests.AdminAssignCourseTest"/>
+      <class name="tests.AdminSearchCourseTest"/>
+      <class name="tests.AdminMarksMainTest"/>
+      <class name="tests.AdminEnterMarksTest"/>	
+      <class name="tests.AdminUpdateMarksTest"/>
+      
+      
+    </classes>
+  </test>
+</suite>

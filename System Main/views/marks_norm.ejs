@@ -1,0 +1,180 @@
+<!-- views/marks_norm.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Marks</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #calculateGPA {
+            padding: 5px 10px;
+            width: auto; 
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div></div> 
+            <a href="#" onclick="downloadMarksheet()" class="download-btn" style="font-size: 14px; font-weight: bold; text-decoration: none; color: #000;">Download<span style="margin-left: 5px;">⬇️</span></a>
+        </div>
+        <h2>Your Marks</h2>
+        <% if (marks.length === 0) { %>
+            <p>No marks available for you.</p>
+        <% } else { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Credits</th> 
+                        <th>MST (30)</th>
+                        <th>EST (40)</th>
+                        <th>Internal (30)</th>
+                        <th>Total (100)</th>
+                        <th>Grade</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <% marks.forEach(mark => { %>
+                        <tr>
+                            <td><%= mark.courseCode %></td>
+                            <td><%= mark.credits %></td> 
+                            <td><%= mark.mst %></td>
+                            <td><%= mark.est %></td>
+                            <td><%= mark.internal %></td>
+                            <td><%= mark.total %></td>
+                            <td>
+                                <% if (mark.total >= 90) { %>
+                                    A
+                                <% } else if (mark.total >= 78) { %>
+                                    A-
+                                <% } else if (mark.total >= 68) { %>
+                                    B
+                                <% } else if (mark.total >= 55) { %>
+                                    B-
+                                <% } else if (mark.total >= 43) { %>
+                                    C
+                                <% } else if (mark.total >= 35) { %>
+                                    C-
+                                <% } else { %>
+                                    E
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                <div>
+                    <label for="gpa" style="margin-right: 10px;">GPA:</label>
+                    <input type="text" id="gpa" readonly style="width: 100px;" /> <!-- Uneditable GPA textbox -->
+                </div>
+                <button id="calculateGPA" style="padding: 5px 10px;">Calculate GPA</button> <!-- Changed button label -->
+
+            </div>
+
+            <script>
+                document.getElementById('calculateGPA').addEventListener('click', function() {
+                    const marksData = [
+                        <% marks.forEach(mark => { %>
+                            { total: <%= mark.total %>, credits: <%= mark.credits %> },
+                        <% }); %>
+                    ];
+
+                    let totalCredits = 0;
+                    let totalPoints = 0;
+
+                    marksData.forEach(mark => {
+                        let gradeWorth = 0;
+                        switch (true) {
+                            case (mark.total >= 90):
+                                gradeWorth = 10;
+                                break;
+                            case (mark.total >= 78):
+                                gradeWorth = 9;
+                                break;
+                            case (mark.total >= 68):
+                                gradeWorth = 8;
+                                break;
+                            case (mark.total >= 55):
+                                gradeWorth = 7;
+                                break;
+                            case (mark.total >= 43):
+                                gradeWorth = 6;
+                                break;
+                            case (mark.total >= 35):
+                                gradeWorth = 5;
+                                break;
+                            default:
+                                gradeWorth = 1;
+                        }
+
+                        totalCredits += mark.credits;
+                        totalPoints += gradeWorth * mark.credits;
+                    });
+
+                    const gpa = totalCredits === 0 ? 0 : (totalPoints / totalCredits).toFixed(2);
+                    document.getElementById('gpa').value = gpa;
+                });
+
+                function downloadMarksheet() {
+                    const table = document.querySelector('table');
+                    let csvContent = "data:text/csv;charset=utf-8,";
+
+                    // Extract headers
+                    const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent.trim());
+                    csvContent += headers.join(",") + "\n";
+
+                    // Extract rows
+                    const rows = Array.from(table.querySelectorAll('tbody tr'));
+                    rows.forEach(row => {
+                        const cells = Array.from(row.querySelectorAll('td')).map(td => td.textContent.trim());
+                        csvContent += cells.join(",") + "\n";
+                    });
+
+                    // Create a download link
+                    const encodedUri = encodeURI(csvContent);
+                    const link = document.createElement("a");
+                    link.setAttribute("href", encodedUri);
+                    link.setAttribute("download", "marksheet.csv");
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            </script>
+        <% } %>
+        <a href="/norm_main" id="backLink" class="back-link">←</a>
+    </div>
+</body>
+</html>

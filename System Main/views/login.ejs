@@ -1,0 +1,48 @@
+<!-- views/login.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      width: 40%; /* Reduced to half of the original 80% */
+    }
+    button {
+      width: auto;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="home-link" id="homeLink" style="position: absolute; top: 10px; left: 10px; font-size: 2rem; text-decoration: none;">🏠</a>
+    <h2>Login</h2>
+    <% if (error && error.length > 0) { %>
+      <div class="error">
+        <% error.forEach(msg => { %>
+          <p><%= msg %></p>
+        <% }) %>
+      </div>
+    <% } %>
+    <form action="/login" method="POST" id="loginForm">
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required placeholder="Enter email">
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" required placeholder="Enter password">
+      <button type="submit" id="loginButton">Login</button>
+    </form>
+    <p>Don't have an account? <a href="/register" id="registerLink">Register now</a></p>
+    <p>Login as a student? <a href="/login_norm" id="studentLoginLink">Click here</a></p>
+  </div>
+  <script src="/js/main.js"></script>
+</body>
+</html>

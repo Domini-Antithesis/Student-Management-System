@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Update Marks</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .back-link {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 2rem;
+            text-decoration: none;
+            color: #007bff;
+            transition: transform 0.3s ease, color 0.3s ease;
+            background: none;
+        }
+        .back-link:hover {
+            transform: scale(1.2);
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Update Marks</h2>
+        <a href="/marks" class="back-link" id="backLink">←</a>
+        <form action="/marks/update/search" method="GET" class="search-bar">
+            <label for="studentID">Search by Student ID:</label>
+            <input type="text" id="studentID" name="studentID" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</body>
+</html>

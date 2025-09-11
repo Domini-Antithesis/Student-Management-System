@@ -1,0 +1,47 @@
+<!-- views/main.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome Page</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      width: 40%; /* Reduced to half of the original 80% */
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      background-color: rgba(255, 255, 255, 0.8);
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .logo {
+      max-width: 150px;
+      margin-bottom: 20px;
+    }
+    button {
+      width: auto;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="/images/thapar_logo.png" alt="Thapar Logo" class="logo">
+    <h1>Student Management System</h1>
+    <p>Please choose an option below:</p>
+    <a href="/login" id="loginLinkMain"><button>Login</button></a>
+    <a href="/register" id="registerLinkMain"><button>Register</button></a>
+  </div>
+  <script src="/js/main.js"></script>
+</body>
+</html>

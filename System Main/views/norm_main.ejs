@@ -1,0 +1,45 @@
+<!-- views/norm_main.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>norm_main</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome, <%= user.username %>!</h2>
+    <% if (success && success.length > 0) { %>
+      <div class="success">
+        <% success.forEach(msg => { %>
+          <p><%= msg %></p>
+        <% }) %>
+      </div>
+    <% } %>
+    <% if (error && error.length > 0) { %>
+      <div class="error">
+        <% error.forEach(msg => { %>
+          <p><%= msg %></p>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <div class="info-container">
+      <a href="/courses/course_norm" id="coursesStudent" class="info-box">Courses</a>
+      <a href="/marks/marks_norm" id="marksStudent" class="info-box">Marks</a>
+    </div>
+    <br>
+    <a href="/logout" id="logoutLink">Logout</a>
+  </div>
+  <script src="/js/main.js"></script>
+</body>
+</html>
